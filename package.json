@@ -23,7 +23,7 @@
   "license": "ISC",
   "author": "Robson Sampaio",
   "type": "module",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "dev": "nodemon server.js",
     "start": "node server.js"
