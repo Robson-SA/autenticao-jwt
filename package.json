@@ -1,0 +1,41 @@
+{
+  "name": "prj-autenticacao-jwt",
+  "version": "1.0.0",
+  "description": "Api de login e cadastro de usuários",
+  "keywords": [
+    "node.js",
+    "express",
+    "mongoDB",
+    "+",
+    "Mongosse",
+    "bcrypt",
+    "jsonwebtoken",
+    "dotenv"
+  ],
+  "homepage": "https://github.com/Robson-SA/autenticao-jwt#readme",
+  "bugs": {
+    "url": "https://github.com/Robson-SA/autenticao-jwt/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Robson-SA/autenticao-jwt.git"
+  },
+  "license": "ISC",
+  "author": "Robson Sampaio",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon server.js",
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.13.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.9"
+  }
+}
