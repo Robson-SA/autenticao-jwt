@@ -1,42 +1,28 @@
+// models/User.js
+import mongoose from 'mongoose';
 import bcrypt from 'bcrypt';
 
-const bcrypt = bcrypt();
+const userSchema = new mongoose.Schema({
+  nome: { type: String, required: true },
+  contato: String,
+  dataNascimento: Date,
+  login: { type: String, required: true, unique: true },
+  senha: { type: String, required: true }
+});
 
-class User{
-    constructor(id, nome, contato, dataNascimento, login, senha){
-        this.id = id;
-        this.nome = nome;
-        this.contato = contato;
-        this.dataNascimento = dataNascimento;
-        this.login = login;
-        this.senha = bcrypt.hashSync(senha, 10);
-    };
+// Criptografa a senha antes de salvar
+userSchema.pre('save', async function (next) {
+  if (!this.isModified('senha')) return next();
+  this.senha = await bcrypt.hash(this.senha, 10);
+  next();
+});
 
-    toJSON(){
-        return {
-            id: this.id,
-            nome: this.nome,
-            contato: this.contato,
-            dataNascimento: this.dataNascimento,
-            login: this.login
-        };
-    }
+// Remove senha ao converter para JSON
+userSchema.methods.toJSON = function () {
+  const obj = this.toObject();
+  delete obj.senha;
+  return obj;
+};
 
-    validar(){
-        if(!this.nome || typeof this.nome !== "string"){
-            throw new Error("Nome é obrigatório");
-        }
-        if(!this.login || typeof this.login !== "string"){
-            throw new Error("login é obrigatório");
-        }
-        if(!this.senha || typeof this.senha !== "string"){
-            throw new Error("senha é obrigatório");
-        }
-        
-    }
-
-}
-
+const User = mongoose.model('User', userSchema);
 export default User;
-
-

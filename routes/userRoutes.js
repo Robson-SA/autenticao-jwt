@@ -1,12 +1,16 @@
-import expres from 'express';
+import express from 'express';
+import { registerUser, loginUser, getProtectedData } from '../controllers/userController.js';
+import authMiddleware from '../middlewares/authMiddleware.js'; 
 
-const router = expres.Router();
+const router = express.Router();
 
-// Resposta "Auth api" da requisão GET.
-router.post('/register');
+// Rota para registrar um novo usuário
+router.post('/register', registerUser);
 
-router.post('/login');
+// Rota para login do usuário
+router.post('/login', loginUser);
 
-router.post('/protected')
+// Rota protegida (requere autenticação via JWT)
+router.get('/protected', authMiddleware, getProtectedData);
 
 export default router;
